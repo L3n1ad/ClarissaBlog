@@ -1,0 +1,65 @@
+<% include ../partials/header %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header"><%=blog.title%></div>
+    <div class="ui top attached">
+        <div class="item">
+        <img class="ui centered rounded image"src="<%=blog.image%>">
+        </div>
+        <div class="content">
+            <span><%= blog.created.toDateString()%></span>
+        </div>
+        <div class="description">
+            <p><%- blog.body %></p>
+        </div>
+        <a class="ui black button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+        <!--<a class="ui black button" href="/blogs/<%= blog._id %>/comments/new">Comment</a>-->
+        <form id="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
+            <button class="ui black button">Delete</button>
+        </form>
+    </div>
+
+</div>
+
+<div class="ui main text container segment">
+
+    <% blog.comments.forEach(function(comment){ %>
+    <div class="ui comments">
+      <div class="comment">
+        <div class="content">
+          <a class="author"><%= comment.author %></a>
+          <div class="metadata">
+            <div class="date"><%= comment.created.toDateString() %></div>
+            <div class="rating">
+              <i class="star icon"></i>
+              5 Faves
+            </div>
+          </div>
+          <div class="text">
+            <%= comment.text %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+    
+    <form class="ui reply form" action="/blogs/<%= blog._id %>/comments" method="POST">
+    <div class="form-group">
+        <input required class="form-control" type="text" name="comment[author]" placeholder="author">
+    </div>
+    <div class="field">
+      <textarea required name="comment[text]" placeholder="Add new comment"></textarea>
+    </div>
+    <button class="ui small blue labeled submit icon button">
+      <i class="icon comment alternate outline"></i> Submit comment
+    </button>
+  </form>
+
+
+<!--<% blog.comments.forEach(function(comment){ %>-->
+<!--    <p>-->
+<!--        <strong><%= comment.author %></strong> - <%= comment.text %>-->
+<!--        </p>-->
+<!--<% }) %>-->
+    
+<% include ../partials/footer %>
