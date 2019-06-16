@@ -1,6 +1,6 @@
 var express             = require("express"),
     app                 = express(),
-    bodyParser          = require("body-parser"), 
+    bodyParser          = require("body-parser"),
     mongoose            = require("mongoose"),
     methodOverride      = require("method-override"),
     passport            = require("passport"),
@@ -14,14 +14,14 @@ var express             = require("express"),
 // seed the DB
 
 // seedDB();
-    
+
 // APP CONFIG
- 
+
 mongoose.connect("mongodb://localhost:27017/ClarissaBlog", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
-app.set("view engine", "ejs"); 
+app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 
@@ -53,7 +53,7 @@ app.get("/", function(req, res){
 // =================
 
 app.get("/", function(req, res){
-   res.render("home"); 
+   res.render("home");
 });
 
 // INDEX ROUTE
@@ -62,7 +62,7 @@ app.get("/blogs", function(req, res){
        if (err){
            console.log("ERROR!!");
        } else {
-            res.render("blogPost/blogs", {blogs: blogs}); 
+            res.render("blogPost/blogs", {blogs: blogs});
        }
     });
 });
@@ -172,7 +172,7 @@ app.get("/login", function(req, res) {
 
 // handeling login logic
 
-app.post("/login", passport.authenticate("local", 
+app.post("/login", passport.authenticate("local",
     {
         successRedirect: "/blogs",
         failureRedirect: "/login"
@@ -239,6 +239,6 @@ function isLoggedIn(req, res, next){
     res.redirect("/login");
 }
 
-app.listen(process.env.PORT, process.env.IP, function (){
+app.listen(3001, "localhost", function (){
     console.log("BLOG server is running!");
 });
