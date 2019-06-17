@@ -1,11 +1,25 @@
+<% include ./partials/header %>
 
-<h1>Login!</h1>
- <div class="landing-container" class="ui raised very padded text container segment">
-    <form class="authForm" action="/login" method="POST">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" value="Login!">
-    </form>
+<div  class="login">
+  <div class="ui huge header text aligned center">Log in</div>
 </div>
 
-<% include ./partials/footer %> 
+  <form class="ui form segment text container" id="blogLogin" action="/login" method="post">
+    <div class="ui stackable grid centered">
+      <div class="six wide column text aligned center">
+        <label class="label">Username</label>
+        <input required type="text" name="username" placeholder="username">
+      </div>
+      <div class="six wide column text aligned center">
+        <label class="label">Password</label>
+        <input required type="password" name="password" placeholder="password">
+      </div>
+    </div>
+    <div class="ui grid centered">
+      <div class="two wide column centered">
+            <button class="ui button" type="submit" name="button">Login!</button>
+      </div>
+    </div>
+  </form>
+
+<% include ./partials/footer %>
