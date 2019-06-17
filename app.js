@@ -9,6 +9,7 @@ var express             = require("express"),
     User                = require("./models/user"),
     Comment             = require("./models/comment"),
     expressSanitizer    = require("express-sanitizer"),
+    middlewareObj          = require("./middleware"),
     seedDB              = require("./seeds");
 
 // seed the DB
@@ -69,12 +70,12 @@ app.get("/blogs", function(req, res){
 
 // NEW ROUTE
 
-app.get("/blogs/new", isLoggedIn, function(req, res){
+app.get("/blogs/new", middlewareObj.isLoggedIn, function(req, res){
     res.render("blogPost/new");
 });
 // CREATE ROUTE
 
-app.post("/blogs", isLoggedIn, function(req, res){
+app.post("/blogs", middlewareObj.isLoggedIn, function(req, res){
     // CREATE BLOG
     req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.create(req.body.blog, function(err, newBlog){
@@ -101,7 +102,7 @@ app.get("/blogs/:id", function (req,res){
 
 // EDIT ROUTE
 
-app.get("/blogs/:id/edit", isLoggedIn, function (req,res){
+app.get("/blogs/:id/edit", middlewareObj.isLoggedIn, function (req,res){
     Blog.findById(req.params.id, function(err, foundBlog){
         if (err){
             res.redirect("/blogs");
@@ -113,7 +114,7 @@ app.get("/blogs/:id/edit", isLoggedIn, function (req,res){
 
 // UPDATE ROUTE
 
-app.put("/blogs/:id", isLoggedIn, function(req, res){
+app.put("/blogs/:id", middlewareObj.isLoggedIn, function(req, res){
     req.body.blog.body = req.sanitize(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
         if (err){
@@ -126,7 +127,7 @@ app.put("/blogs/:id", isLoggedIn, function(req, res){
 
 // DELETE ROUTE
 
-app.delete("/blogs/:id", isLoggedIn, function (req, res){
+app.delete("/blogs/:id", middlewareObj.isLoggedIn, function (req, res){
         //   Destroy blog
     Blog.findByIdAndRemove(req.params.id, function(err){
         if (err){
@@ -153,6 +154,9 @@ app.get("/register", function (req, res){
 
 app.post("/register", function (req, res){
     var newUser = new User({username: req.body.username});
+    if(req.body.adminCode === "secretcode123"){
+      newUser.isAdmin = true;
+    }
     User.register(newUser, req.body.password, function (err, user){
         if (err){
             console.log(err);
@@ -203,7 +207,7 @@ app.get("/logout", function(req, res) {
 //     });
 // });
 
-app.post("/blogs/:id/comments", isLoggedIn, function (req, res){
+app.post("/blogs/:id/comments", middlewareObj.isLoggedIn, function (req, res){
     // look up blog by id
     Blog.findById(req.params.id, function (err, blog){
        if (err){
@@ -232,12 +236,8 @@ app.post("/blogs/:id/comments", isLoggedIn, function (req, res){
 // MIDDLEWARE
 // ===============
 
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login");
-}
+
+
 
 app.listen(3001, "localhost", function (){
     console.log("BLOG server is running!");
