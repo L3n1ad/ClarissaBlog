@@ -26,7 +26,6 @@
 </div>
 
 <div class="ui main text container segment">
-
     <% blog.comments.forEach(function(comment){ %>
     <div class="ui comments">
       <div class="comment">
@@ -40,9 +39,12 @@
             </div>
           </div>
           <div class="text">
-            <%= comment.text %>
+            <input name="comment[text]" type="text" value="<%= comment.text %>"></input>
           </div>
         </div>
+        <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" method="POST">
+          <input type="submit" class="ui red button" value="Edit">
+        </form>
         <form action="/blogs/<%= blog._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
           <input type="submit" class="ui red button" value="Delete">
         </form>
@@ -58,12 +60,5 @@
       <i class="icon comment alternate outline"></i> Submit comment
     </button>
   </form>
-
-
-<!--<% blog.comments.forEach(function(comment){ %>-->
-<!--    <p>-->
-<!--        <strong><%= comment.author %></strong> - <%= comment.text %>-->
-<!--        </p>-->
-<!--<% }) %>-->
 
 <% include ../partials/footer %>
