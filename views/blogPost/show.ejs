@@ -27,7 +27,7 @@
     <div class="ui comments">
       <div class="comment">
         <div class="content">
-          <a class="author"><%= comment.author %></a>
+          <a class="author"><%= comment.author.username %></a>
           <div class="metadata">
             <div class="date"><%= comment.created.toDateString() %></div>
             <div class="rating">
@@ -42,11 +42,8 @@
       </div>
     </div>
     <% }) %>
-    
+
     <form class="ui reply form" action="/blogs/<%= blog._id %>/comments" method="POST">
-    <div class="form-group">
-        <input required class="form-control" type="text" name="comment[author]" placeholder="author">
-    </div>
     <div class="field">
       <textarea required name="comment[text]" placeholder="Add new comment"></textarea>
     </div>
@@ -61,5 +58,5 @@
 <!--        <strong><%= comment.author %></strong> - <%= comment.text %>-->
 <!--        </p>-->
 <!--<% }) %>-->
-    
+
 <% include ../partials/footer %>
