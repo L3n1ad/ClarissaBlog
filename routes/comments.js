@@ -1,5 +1,5 @@
 var express       = require ("express"),
-    router        = express.Router(),
+    router        = express.Router({mergeParams: true}),
     Blog          = require ("../models/blog"),
     Comment       = require("../models/comment"),
     middlewareObj = require("../middleware");
