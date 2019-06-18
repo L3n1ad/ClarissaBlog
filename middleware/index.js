@@ -18,11 +18,17 @@ middlewareObj.isLoggedIn = function (req, res, next){
 
 middlewareObj.checkAdminAuth = function (req, res, next){
   if(req.isAuthenticated()){
-    User.findById(req.params.body, function (err, foundUser){
+    User.findById(req.user, function (err, foundUser){
       if (err){
         console.log(err);
       } else {
-        console.log
+        // does the user has admin author
+        if(foundUser.isAdmin === true) {
+          next()
+        } else {
+          console.log("checkAdminAuth is working")
+          res.redirect("/");
+        }
       }
     })
   }
