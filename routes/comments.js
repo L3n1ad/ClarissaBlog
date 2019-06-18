@@ -2,11 +2,12 @@ var express       = require ("express"),
     router        = express.Router({mergeParams: true}),
     Blog          = require ("../models/blog"),
     Comment       = require("../models/comment"),
+    User          = require("../models/user"),
     middlewareObj = require("../middleware");
 
-// ===========================================================================================
+// ===================
 // COMMENTS ROUTE
-// ===========================================================================================
+// ===================
 
 router.post("/", middlewareObj.isLoggedIn, function (req, res){
     // look up blog by id
@@ -19,6 +20,11 @@ router.post("/", middlewareObj.isLoggedIn, function (req, res){
                if (err){
                    console.log(err);
                } else {
+                 // add username and id to comment
+                 comment.author.id = req.user._id;
+                 comment.author.username = req.user.username;
+                 // save comment
+                 comment.save();
                    blog.comments.push(comment);
                    blog.save();
                    res.redirect("/blogs/" + blog._id);
