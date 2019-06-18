@@ -20,12 +20,12 @@ var express       = require ("express"),
 
     // NEW ROUTE
 
-    router.get("/new", middlewareObj.isLoggedIn, function(req, res){
+    router.get("/new", middlewareObj.checkAdminAuth, function(req, res){
         res.render("blogPost/new");
     });
     // CREATE ROUTE
 
-    router.post("/", middlewareObj.isLoggedIn, function(req, res){
+    router.post("/", middlewareObj.checkAdminAuth, function(req, res){
         // CREATE BLOG
         req.body.blog.body = req.sanitize(req.body.blog.body);
         Blog.create(req.body.blog, function(err, newBlog){
@@ -52,7 +52,7 @@ var express       = require ("express"),
 
     // EDIT ROUTE
 
-    router.get("/:id/edit", middlewareObj.isLoggedIn, function (req,res){
+    router.get("/:id/edit", middlewareObj.checkAdminAuth, function (req,res){
         Blog.findById(req.params.id, function(err, foundBlog){
             if (err){
                 res.redirect("/blogs");
@@ -64,7 +64,7 @@ var express       = require ("express"),
 
     // UPDATE ROUTE
 
-    router.put("/:id", middlewareObj.isLoggedIn, function(req, res){
+    router.put("/:id", middlewareObj.checkAdminAuth, function(req, res){
         req.body.blog.body = req.sanitize(req.body.blog.body);
         Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
             if (err){
