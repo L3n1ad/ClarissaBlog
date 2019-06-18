@@ -38,6 +38,26 @@ router.post("/", middlewareObj.isLoggedIn, function (req, res){
 
 });
 
+// COMMENTS UPDATE ROUTE
+
+router.put("/:comment_id", function(req, res){
+  Comment.findById(req.params.comment_id, function(err, findComment){
+    if (err){
+      console.log(err);
+    } else {
+      console.log(findComment);
+    };
+  });
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment_text, function(err, updatedComment){
+      if(err){
+        res.redirect("back");
+      } else {
+        console.log(updatedComment);
+        res.redirect("/blogs/" + req.params.id);
+      }
+  });
+});
+
 // DESTROY ROUTE
 
 router.delete("/:comment_id",  function (req, res){
