@@ -12,11 +12,14 @@
         <div class="description">
             <p><%- blog.body %></p>
         </div>
-        <% if(currentUser.isAdmin){ %>
-        <a class="ui black button" href="/blogs/<%= blog._id %>/edit">Edit</a>
-        <form id="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
-            <button class="ui black button">Delete</button>
-        </form>
+        <% if(!currentUser){ %>
+        <% } else { %>
+          <% if(currentUser.isAdmin){ %>
+            <a class="ui black button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+            <form id="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
+                <button class="ui black button">Delete</button>
+            </form>
+          <% } %>
         <% } %>
     </div>
 
