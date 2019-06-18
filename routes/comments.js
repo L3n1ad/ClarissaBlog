@@ -38,4 +38,17 @@ router.post("/", middlewareObj.isLoggedIn, function (req, res){
 
 });
 
+// DESTROY ROUTE
+
+router.delete("/:comment_id",  function (req, res){
+    //find by Id and remove
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/blogs/" + req.params.id);
+        }
+    });
+});
+
   module.exports = router;
