@@ -154,18 +154,23 @@ app.get("/register", function (req, res){
 
 app.post("/register", function (req, res){
     var newUser = new User({username: req.body.username});
-    if(req.body.adminCode === "secretcode123"){
+    if(req.body.invitationCode === "secretcode123"){
       newUser.isAdmin = true;
     }
-    User.register(newUser, req.body.password, function (err, user){
-        if (err){
-            console.log(err);
-            return res.render("register");
-        }
-        passport.authenticate("local")(req, res, function(){
-            res.redirect("/blogs");
-        });
-    });
+    if(req.body.invitationCode === "123456"){
+      console.log(newUser);
+      User.register(newUser, req.body.password, function (err, user){
+          if (err){
+              console.log(err);
+              return res.render("register");
+          }
+          passport.authenticate("local")(req, res, function(){
+              res.redirect("/blogs");
+          });
+      });
+    } else {
+      return res.render("register");
+    }
 });
 
 // show log in form
