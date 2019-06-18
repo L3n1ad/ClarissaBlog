@@ -77,7 +77,7 @@ var express       = require ("express"),
 
     // DELETE ROUTE
 
-    router.delete("/:id", middlewareObj.isLoggedIn, function (req, res){
+    router.delete("/:id", middlewareObj.checkAdminAuth, function (req, res){
             //   Destroy blog
         Blog.findByIdAndRemove(req.params.id, function(err){
             if (err){
