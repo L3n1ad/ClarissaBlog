@@ -40,7 +40,7 @@ router.post("/", middlewareObj.isLoggedIn, function (req, res){
 
 // COMMENTS UPDATE ROUTE
 
-router.put("/:comment_id", function(req, res){
+router.put("/:comment_id",  middlewareObj.checkCommentOwnership, function(req, res){
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, {new: true}, function(err, updatedComment){
       if(err){
         res.redirect("back");
@@ -51,9 +51,10 @@ router.put("/:comment_id", function(req, res){
   });
 });
 
+
 // DESTROY ROUTE
 
-router.delete("/:comment_id",  function (req, res){
+router.delete("/:comment_id", middlewareObj.checkCommentOwnership, function (req, res){
     //find by Id and remove
     Comment.findByIdAndRemove(req.params.comment_id, function(err){
         if(err){
