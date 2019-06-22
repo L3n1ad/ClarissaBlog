@@ -34,4 +34,26 @@ middlewareObj.checkAdminAuth = function (req, res, next){
   }
 }
 
+middlewareObj.checkCommentOwnership = function (req, res, next){
+  if(req.isAuthenticated()){
+    Comment.findById(req.params.comment_id, function (err, foundComment){
+      if(err){
+        console.log(err + "error in checkCommentOwnership");
+        res.redirect("back");
+      } else {
+        // does the user own the comments
+        if(foundComment.author.id.equals(req.user._id)){
+          next();
+        } else {
+          console.log(err + "error in checkCommentOwnership");
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+    console.log("checkCommentOwnership is working");
+  }
+};
+
 module.exports = middlewareObj ;
