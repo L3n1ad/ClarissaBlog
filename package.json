@@ -15,6 +15,7 @@
     "express-sanitizer": "^1.0.5",
     "express-session": "^1.16.2",
     "method-override": "^3.0.0",
+    "moment": "^2.24.0",
     "mongod": "^2.0.0",
     "mongoose": "^5.5.7",
     "package.json": "^2.0.1",
