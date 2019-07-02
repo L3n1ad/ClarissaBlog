@@ -1,6 +1,7 @@
 var express       = require ("express"),
     router        = express.Router(),
     Blog          = require ("../models/blog"),
+    moment        = require("moment"),
     middlewareObj = require("../middleware");
 
     // =====================
@@ -13,7 +14,7 @@ var express       = require ("express"),
            if (err){
                console.log("ERROR!!");
            } else {
-                res.render("blogPost/blogs", {blogs: blogs});
+                res.render("blogPost/blogs", {blogs: blogs, moment:moment});
            }
         });
     });
@@ -45,7 +46,7 @@ var express       = require ("express"),
             if (err){
                 res.redirect("/blogs");
             } else {
-                res.render("blogPost/show", { blog: foundBlog});
+                res.render("blogPost/show", { blog: foundBlog, moment:moment});
             }
         });
     });
