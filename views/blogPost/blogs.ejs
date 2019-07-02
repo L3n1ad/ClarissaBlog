@@ -12,10 +12,10 @@
                     <div class="content">
                          <a class="header" href="/blogs/<%= blog._id %>"><%=blog.title%></a>
                          <div class="meta">
-                             <span><%= blog.created.toDateString() %></span>
+                             <span><%= moment(blog.created).format("Do MMMM YYYY") %></span>
                          </div>
                          <div class="description">
-                             <p><%- blog.body.substring(0, 100) %>...</p>
+                             <p><%- blog.body.substring(0, 300) %>...</p>
                          </div>
                          <div class="extra">
                              <a class="ui floated basic violet button" href="/blogs/<%= blog._id %>">
