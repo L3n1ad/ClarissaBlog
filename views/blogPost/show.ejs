@@ -7,7 +7,7 @@
         <img class="ui centered rounded image"src="<%=blog.image%>">
         </div>
         <div class="content">
-            <span><%= blog.created.toDateString()%></span>
+            <span><%= moment(blog.created).fromNow() %></span>
         </div>
         <div class="description">
             <p><%- blog.body %></p>
@@ -32,7 +32,7 @@
         <div class="content" name="content">
           <a class="author"><%= comment.author.username %></a>
           <div class="metadata">
-            <div class="date"><%= comment.created.toDateString() %></div>
+            <div class="date"><%= moment(comment.created).fromNow() %></div>
             <div class="rating">
               <i class="star icon"></i>
               5 Faves
