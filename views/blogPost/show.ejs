@@ -1,67 +1,91 @@
 <% include ../partials/header %>
 
-<div class="ui main text container segment">
-    <div class="ui huge header"><%=blog.title%></div>
-    <div class="ui top attached">
-        <div class="item">
-        <img class="ui centered rounded image"src="<%=blog.image%>">
-        </div>
-        <div class="content">
-            <span><%= moment(blog.created).fromNow() %></span>
-        </div>
-        <div class="description">
-            <p><%- blog.body %></p>
-        </div>
-        <% if(!currentUser){ %>
-        <% } else { %>
-          <% if(currentUser.isAdmin){ %>
-            <a class="ui black button" href="/blogs/<%= blog._id %>/edit">Edit</a>
-            <form id="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
-                <button class="ui black button">Delete</button>
-            </form>
-          <% } %>
-        <% } %>
+<div class="ui stackable grid container">
+  <div class="ui four wide column">
+    <div id="map">
+      <script>
+      // Initialize and add the map
+      function initMap() {
+      // The location of Uluru
+      var uluru = {lat: 55.9533, lng: -3.1883};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 8, center: uluru});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: uluru, map: map});
+      }
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs5XofhDjx5Cz1E8WxCXbQ17vnfLTMRh0&callback=initMap">
+      </script>
     </div>
+  </div>
 
-</div>
-
-<div class="ui main text container segment">
-    <% blog.comments.forEach(function(comment){ %>
-    <div class="ui comments">
-      <div class="comment">
-        <div class="content" name="content">
-          <a class="author"><%= comment.author.username %></a>
-          <div class="metadata">
-            <div class="date"><%= moment(comment.created).fromNow() %></div>
-            <div class="rating">
-              <i class="star icon"></i>
-              5 Faves
+  <div class="twelve wide column">
+    <div class="ui main text container segment">
+        <div class="ui huge header"><%=blog.title%></div>
+        <div class="ui top attached">
+            <div class="item">
+            <img class="ui centered rounded image"src="<%=blog.image%>">
             </div>
-          </div>
-
+            <div class="content">
+                <span><%= moment(blog.created).fromNow() %></span>
+            </div>
+            <div class="description">
+                <p><%- blog.body %></p>
+            </div>
+            <% if(!currentUser){ %>
+            <% } else { %>
+              <% if(currentUser.isAdmin){ %>
+                <a class="ui black button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+                <form id="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
+                    <button class="ui black button">Delete</button>
+                </form>
+              <% } %>
+            <% } %>
         </div>
-        <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-          <div class="text">
-            <input name="comment[text]" type="text" value="<%= comment.text %>"></input>
-          </div>
-          <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-          <input type="submit" class="ui yellow button" value="Edit">
-        </form>
-        <form action="/blogs/<%= blog._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
-          <input type="submit" class="ui red button" value="Delete">
-        </form>
-        <% } %>
-      </div>
-    </div>
-    <% }) %>
 
-    <form class="ui reply form" action="/blogs/<%= blog._id %>/comments" method="POST">
-    <div class="field">
-      <textarea required name="comment[text]" placeholder="Add new comment"></textarea>
     </div>
-    <button class="ui small blue labeled submit icon button">
-      <i class="icon comment alternate outline"></i> Submit comment
-    </button>
-  </form>
+
+    <div class="ui main text container segment">
+        <% blog.comments.forEach(function(comment){ %>
+        <div class="ui comments">
+          <div class="comment">
+            <div class="content" name="content">
+              <a class="author"><%= comment.author.username %></a>
+              <div class="metadata">
+                <div class="date"><%= moment(comment.created).fromNow() %></div>
+                <div class="rating">
+                  <i class="star icon"></i>
+                  5 Faves
+                </div>
+              </div>
+
+            </div>
+            <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+              <div class="text">
+                <input name="comment[text]" type="text" value="<%= comment.text %>"></input>
+              </div>
+              <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+              <input type="submit" class="ui yellow button" value="Edit">
+            </form>
+            <form action="/blogs/<%= blog._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+              <input type="submit" class="ui red button" value="Delete">
+            </form>
+            <% } %>
+          </div>
+        </div>
+        <% }) %>
+
+        <form class="ui reply form" action="/blogs/<%= blog._id %>/comments" method="POST">
+        <div class="field">
+          <textarea required name="comment[text]" placeholder="Add new comment"></textarea>
+        </div>
+        <button class="ui small blue labeled submit icon button">
+          <i class="icon comment alternate outline"></i> Submit comment
+        </button>
+      </form>
+    </div>
+  </div>
 
 <% include ../partials/footer %>
