@@ -6,13 +6,29 @@
       <script>
       // Initialize and add the map
       function initMap() {
-      // The location of Uluru
-      var uluru = {lat: 55.9533, lng: -3.1883};
-      // The map, centered at Uluru
-      var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 8, center: uluru});
-      // The marker, positioned at Uluru
-      var marker = new google.maps.Marker({position: uluru, map: map});
+      // set the location from mongoDB
+      var lat = <%= blog.lat %>;
+      var lng = <%= blog.lng %>;
+      var center = {lat:lat, lng:lng};
+      var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: center,
+        scrollwheel: true
+      });
+          var contentString = `
+          <strong><%= blog.title %><br />
+          <%= blog.location %></strong>
+        `
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        var marker = new google.maps.Marker({
+            position: center,
+            map: map
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
       }
       </script>
       <script async defer
