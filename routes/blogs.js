@@ -4,6 +4,19 @@ var express       = require ("express"),
     moment        = require("moment"),
     middlewareObj = require("../middleware");
 
+// set up GEOCODER
+
+var NodeGeocoder = require('node-geocoder');
+
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+
+var geocoder = NodeGeocoder(options);
+
     // =====================
     // BLOG ROUTES
     // =================
@@ -28,15 +41,36 @@ var express       = require ("express"),
 
     router.post("/", middlewareObj.checkAdminAuth, function(req, res){
         // CREATE BLOG
-        req.body.blog.body = req.sanitize(req.body.blog.body);
-        Blog.create(req.body.blog, function(err, newBlog){
+        // get data from form and add to blogs array
+        var title = req.body.blog.title;
+        var image = req.body.blog.image;
+        var body = req.body.blog.body;
+        var author = {
+          id: req.user._id,
+          username: req.user.username
+        }
+        geocoder.geocode(req.body.location, function (err, data) {
+          if (err || !data.length) {
+            console.log(err);
+            return res.redirect('back');
+          }
+          var lat = data[0].latitude;
+          var lng = data[0].longitude;
+          var location = data[0].formattedAddress;
+          var newBlog = {title:title, image: image, body:body, author:author, location: location, lat: lat, lng: lng};
+
+        // create a new blog
+        Blog.create(newBlog, function(err, newBlog){
             if(err){
                 res.render("blogPost/new");
+                console.log(err);
             } else {
                 // THEN REDIRECT
+                console.log(newBlog);
                 res.redirect("/blogs");
             }
         });
+      });
     });
 
     // SHOW ROUTE
