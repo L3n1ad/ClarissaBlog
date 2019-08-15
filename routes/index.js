@@ -1,7 +1,7 @@
 var express       = require ("express"),
     router        = express.Router(),
     passport      = require ("passport"),
-    user          = require ("../models/user");
+    User          = require ("../models/user");
 
 
     router.get("/", function(req, res){
@@ -22,10 +22,10 @@ router.get("/register", function (req, res){
 
 router.post("/register", function (req, res){
     var newUser = new User({username: req.body.username});
-    if(req.body.invitationCode === "secretcode123"){
-      newUser.isAdmin = true;
-    }
-    if(req.body.invitationCode === "123456"){
+    if(req.body.invitationCode === "123456" || req.body.invitationCode === "secretcode123" ){
+      if(req.body.invitationCode === "secretcode123"){
+        newUser.isAdmin = true;
+      }
       console.log(newUser);
       User.register(newUser, req.body.password, function (err, user){
           if (err){
