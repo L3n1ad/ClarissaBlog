@@ -2,37 +2,17 @@
 
 <div class="ui stackable grid container">
   <div class="ui four wide column">
-    <div id="map">
+    <div id="mapid">
       <script>
-      // Initialize and add the map
-      function initMap() {
-      // set the location from mongoDB
-      var lat = <%= blog.lat %>;
-      var lng = <%= blog.lng %>;
-      var center = {lat:lat, lng:lng};
-      var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 12,
-        center: center,
-        scrollwheel: true
-      });
-          var contentString = `
-          <strong><%= blog.title %><br />
-          <%= blog.location %></strong>
-        `
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-        var marker = new google.maps.Marker({
-            position: center,
-            map: map
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-      }
-      </script>
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs5XofhDjx5Cz1E8WxCXbQ17vnfLTMRh0&callback=initMap">
+        var mymap = L.map('mapid').setView([<%= blog.lat %>, <%= blog.lng %>], 13);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id:"mapbox.satellite",
+          accessToken: 'pk.eyJ1IjoibDNuMWFkIiwiYSI6ImNqemNsb2w3bjA2dGgzZ21ndmtqeXJlMDQifQ.jJsl02UJ5r2Rcmv5n8mLyw'
+        }).addTo(mymap);
+        var marker = L.marker([<%= blog.lat %>, <%= blog.lng %>]).addTo(mymap);
+        marker.bindPopup("<b>Restaurant Name</b>").openPopup();
       </script>
     </div>
   </div>
