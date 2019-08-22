@@ -2,7 +2,21 @@ var express       = require ("express"),
     router        = express.Router(),
     Blog          = require ("../models/blog"),
     moment        = require("moment"),
+    multer        = require("multer"),
     middlewareObj = require("../middleware");
+
+// create multer(pic) upload
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.body.blog.title + ".jpg")
+  }
+})
+
+var upload = multer({ storage: storage })
 
 // set up GEOCODER
 
@@ -34,17 +48,19 @@ var geocoder = NodeGeocoder(options);
 
     // NEW ROUTE
 
-    router.get("/new", middlewareObj.checkAdminAuth, function(req, res){
+    router.get("/new", middlewareObj.checkAdminAuth,  function(req, res){
         res.render("blogPost/new");
     });
     // CREATE ROUTE
 
-    router.post("/", middlewareObj.checkAdminAuth, function(req, res){
+    router.post("/", middlewareObj.checkAdminAuth, upload.single("BlogPicture"), function(req, res){
+      console.log(req.file);
         // CREATE BLOG
         // get data from form and add to blogs array
         var title = req.body.blog.title;
         var image = req.body.blog.image;
         var body = req.body.blog.body;
+        var blogpicture = req.file;
         var author = {
           id: req.user._id,
           username: req.user.username
@@ -57,7 +73,7 @@ var geocoder = NodeGeocoder(options);
           var lat = data[0].latitude;
           var lng = data[0].longitude;
           var location = data[0].formattedAddress;
-          var newBlog = {title:title, image: image, body:body, author:author, location: location, lat: lat, lng: lng};
+          var newBlog = {BlogPictre:blogpicture, title:title, image: image, body:body, author:author, location: location, lat: lat, lng: lng};
 
         // create a new blog
         Blog.create(newBlog, function(err, newBlog){
