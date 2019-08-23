@@ -5,6 +5,7 @@ var blogSchema = new mongoose.Schema({
    title: String,
    image: String,
    body: String,
+   blogImage: String,
    location: String,
    lat: Number,
    lng: Number,
