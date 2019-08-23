@@ -60,7 +60,7 @@ var geocoder = NodeGeocoder(options);
         var title = req.body.blog.title;
         var image = req.body.blog.image;
         var body = req.body.blog.body;
-        var blogpicture = req.file;
+        var blogImage = req.file.path;
         var author = {
           id: req.user._id,
           username: req.user.username
@@ -73,7 +73,7 @@ var geocoder = NodeGeocoder(options);
           var lat = data[0].latitude;
           var lng = data[0].longitude;
           var location = data[0].formattedAddress;
-          var newBlog = {BlogPictre:blogpicture, title:title, image: image, body:body, author:author, location: location, lat: lat, lng: lng};
+          var newBlog = {blogImage:blogImage, title:title, image: image, body:body, author:author, location: location, lat: lat, lng: lng};
 
         // create a new blog
         Blog.create(newBlog, function(err, newBlog){
