@@ -35,6 +35,8 @@ app.use(expressSanitizer());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+// make uplodas folder public
+app.use("/uploads", express.static("uploads"));
 
 // passport configuration
 
