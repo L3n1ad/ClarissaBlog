@@ -5,7 +5,18 @@ var blogSchema = new mongoose.Schema({
    title: String,
    image: String,
    body: String,
-   blogImage: String,
+   author: {
+     id: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: "User"
+     },
+     username: String,
+   },
+   blogImage1:String,
+   blogImage2:String,
+   blogImage3:String,
+   blogImage4:String,
+   blogImage5:String,
    location: String,
    lat: Number,
    lng: Number,
