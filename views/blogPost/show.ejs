@@ -22,7 +22,14 @@
         <div class="ui huge header"><%=blog.title%></div>
         <div class="ui top attached">
             <div class="item">
-            <img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage1%>">
+              <div class="slider">
+                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage1%>"></div>
+                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage2%>"></div>
+                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage3%>"></div>
+                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage4%>"></div>
+                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage5%>"></div>
+              </div>
+
             </div>
             <div class="content">
                 <span><%= moment(blog.created).fromNow() %></span>
@@ -84,4 +91,19 @@
     </div>
   </div>
 
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.slider').slick({
+        dots:true,
+        arrows: true,
+        autoplay:true,
+        autplaySpeed:1000,
+        adaptiveHeight: true
+      });
+    });
+  </script>
 <% include ../partials/footer %>
