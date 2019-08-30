@@ -12,11 +12,11 @@ var storage = multer.diskStorage({
     cb(null, './uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, req.body.blog.title + ".jpg")
+    cb(null, req.body.blog.title + Date.now() + ".jpg");
   }
-})
+});
 
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 
 // set up GEOCODER
 
@@ -53,14 +53,18 @@ var geocoder = NodeGeocoder(options);
     });
     // CREATE ROUTE
 
-    router.post("/", middlewareObj.checkAdminAuth, upload.single("BlogPicture"), function(req, res){
-      console.log(req.file);
+    router.post("/", middlewareObj.checkAdminAuth, upload.any(), function(req, res){
+      console.log(req.files);
         // CREATE BLOG
         // get data from form and add to blogs array
         var title = req.body.blog.title;
         var image = req.body.blog.image;
         var body = req.body.blog.body;
-        var blogImage = req.file.path;
+        var blogImage1 = req.files[0].path
+        var blogImage2 = req.files[1].path
+        var blogImage3 = req.files[2].path
+        var blogImage4 = req.files[3].path
+        var blogImage5 = req.files[4].path
         var author = {
           id: req.user._id,
           username: req.user.username
@@ -73,7 +77,7 @@ var geocoder = NodeGeocoder(options);
           var lat = data[0].latitude;
           var lng = data[0].longitude;
           var location = data[0].formattedAddress;
-          var newBlog = {blogImage:blogImage, title:title, image: image, body:body, author:author, location: location, lat: lat, lng: lng};
+          var newBlog = {blogImage1:blogImage1,blogImage2:blogImage2,blogImage3:blogImage3,blogImage4:blogImage4,blogImage5:blogImage5, title:title, image: image, body:body, author:author, location: location, lat: lat, lng: lng};
 
         // create a new blog
         Blog.create(newBlog, function(err, newBlog){
