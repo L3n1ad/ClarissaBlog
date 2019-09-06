@@ -2,18 +2,20 @@
 
 <div class="ui stackable grid container">
   <div class="ui four wide column">
-    <div id="mapid">
-      <script>
-        var mymap = L.map('mapid').setView([<%= blog.lat %>, <%= blog.lng %>], 13);
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          maxZoom: 18,
-          id:"mapbox.satellite",
-          accessToken: 'pk.eyJ1IjoibDNuMWFkIiwiYSI6ImNqemNsb2w3bjA2dGgzZ21ndmtqeXJlMDQifQ.jJsl02UJ5r2Rcmv5n8mLyw'
-        }).addTo(mymap);
-        var marker = L.marker([<%= blog.lat %>, <%= blog.lng %>]).addTo(mymap);
-        marker.bindPopup("<b>Restaurant Name</b>").openPopup();
-      </script>
+    <div class="ui">
+      <div id="mapid">
+        <script>
+          var mymap = L.map('mapid').setView([<%= blog.lat %>, <%= blog.lng %>], 13);
+          L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id:"mapbox.satellite",
+            accessToken: 'pk.eyJ1IjoibDNuMWFkIiwiYSI6ImNqemNsb2w3bjA2dGgzZ21ndmtqeXJlMDQifQ.jJsl02UJ5r2Rcmv5n8mLyw'
+          }).addTo(mymap);
+          var marker = L.marker([<%= blog.lat %>, <%= blog.lng %>]).addTo(mymap);
+          marker.bindPopup("<b>Restaurant Name</b>").openPopup();
+        </script>
+      </div>
     </div>
   </div>
 
@@ -23,11 +25,11 @@
         <div class="ui top attached">
             <div class="item">
               <div class="slider">
-                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage1%>"></div>
-                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage2%>"></div>
-                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage3%>"></div>
-                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage4%>"></div>
-                <div><img class="ui centered rounded image"src="http://localhost:3001/<%=blog.blogImage5%>"></div>
+                <div><img class="ui centered image"src="http://localhost:3001/<%=blog.blogImage1%>"></div>
+                <div><img class="ui centered image"src="http://localhost:3001/<%=blog.blogImage2%>"></div>
+                <div><img class="ui centered image"src="http://localhost:3001/<%=blog.blogImage3%>"></div>
+                <div><img class="ui centered image"src="http://localhost:3001/<%=blog.blogImage4%>"></div>
+                <div><img class="ui centered image"src="http://localhost:3001/<%=blog.blogImage5%>"></div>
               </div>
 
             </div>
@@ -44,6 +46,8 @@
                 <form id="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
                     <button class="ui black button">Delete</button>
                 </form>
+              <% } if(currentUser){ %>
+                <div class="ui star rating" data-rating="3"></div>
               <% } %>
             <% } %>
         </div>
@@ -101,8 +105,15 @@
         dots:true,
         arrows: true,
         autoplay:true,
-        autplaySpeed:1000,
-        adaptiveHeight: true
+        autplaySpeed:20,
+        adaptiveHeight: true,
+        respondTo: "window",
+        variableWidth: false,
+      });
+      $('.slider').slick({
+    // @type {string} html
+        nextArrow: '<button class="ui button">Next</button>',
+        prevArrow: '<button class="any-class-name-you-want-previous">Previous</button>'
       });
     });
   </script>
