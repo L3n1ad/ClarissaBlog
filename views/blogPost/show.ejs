@@ -43,7 +43,7 @@
             <% } else { %>
               <% if(currentUser.isAdmin){ %>
                 <a class="ui black button" href="/blogs/<%= blog._id %>/edit">Edit</a>
-                <form id="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
+                <form class="delete" action="/blogs/<%=blog._id %>?_method=DELETE" method="POST">
                     <button class="ui black button">Delete</button>
                 </form>
               <% } if(currentUser){ %>
@@ -55,39 +55,59 @@
     </div>
 
     <div class="ui main text container segment">
-        <% blog.comments.forEach(function(comment){ %>
-        <div class="ui comments">
-          <div class="comment">
-            <div class="content" name="content">
-              <a class="author"><%= comment.author.username %></a>
-              <div class="metadata">
-                <div class="date"><%= moment(comment.created).fromNow() %></div>
-              </div>
+      <div class="ui comments">
+        <h3 class="ui dividing header">Comments</h3>
+          <% blog.comments.forEach(function(comment){ %>
+            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
 
-            </div>
-            <form action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-              <div class="text">
-                <input name="comment[text]" type="text" value="<%= comment.text %>"></input>
-              </div>
-              <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
-              <input type="submit" class="ui yellow button" value="Edit">
-            </form>
-            <form action="/blogs/<%= blog._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
-              <input type="submit" class="ui red button" value="Delete">
-            </form>
+                <div class="comment">
+                  <div class="content">
+                    <a class="author"><%= comment.author.username %></a>
+                    <div class="metadata">
+                      <div class="date">Posted: <%= moment(comment.created).fromNow() %></div>
+                    </div>
+                    <div class="text">
+                      <form class="ui reply form" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+                        <div class="field">
+                            <textarea name="comment[text]" rows="3" cols="80" style="margin-top: 0px; margin-bottom: 0px; height: 55px;"><%= comment.text %></textarea>
+                        </div>
+                        <div class="commentButton">
+                          <input type="submit" class="ui black button edit space" value="Edit">
+                        </div>
+                      </form>
+                      <form class="delete" action="/blogs/<%= blog._id%>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+                        <div class="commentButton">
+                          <input type="submit" class="ui black button delete" value="Delete">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            <% } else { %>
+                <div class="comment">
+                  <div class="content">
+                    <a class="author"><%= comment.author.username %></a>
+                    <div class="metadata">
+                      <div class="date">Posted: <%= moment(comment.created).fromNow() %></div>
+                    </div>
+                    <div class="text">
+                      <%= comment.text %>
+                    </div>
+                  </div>
+                </div>
             <% } %>
-          </div>
+          <% }) %>
         </div>
-        <% }) %>
-
         <form class="ui reply form" action="/blogs/<%= blog._id %>/comments" method="POST">
-        <div class="field">
-          <textarea required name="comment[text]" placeholder="Add new comment"></textarea>
-        </div>
-        <button class="ui small blue labeled submit icon button">
-          <i class="icon comment alternate outline"></i> Submit comment
-        </button>
-      </form>
+          <div class="field">
+            <label><h1>Leave some comment below</h1></label>
+            <textarea required wrap="hard" name="comment[text]" placeholder="Add new comment" rows="2" style="margin-top: 0px; margin-bottom: 0px; height: 55px;"></textarea>
+          </div>
+          <button class="ui small black labeled submit icon button">
+            <i class="icon Medium comment alternate outline"></i> Submit comment
+          </button>
+        </form>
+    </div>
     </div>
   </div>
 
@@ -105,11 +125,6 @@
         adaptiveHeight: true,
         respondTo: "window",
         variableWidth: false,
-      });
-      $('.slider').slick({
-    // @type {string} html
-        nextArrow: '<button class="ui button">Next</button>',
-        prevArrow: '<button class="any-class-name-you-want-previous">Previous</button>'
       });
     });
   </script>
