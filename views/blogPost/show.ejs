@@ -100,12 +100,9 @@
         </div>
         <form class="ui reply form" action="/blogs/<%= blog._id %>/comments" method="POST">
           <div class="field">
-            <label><h1>Leave some comment below</h1></label>
             <textarea required wrap="hard" name="comment[text]" placeholder="Add new comment" rows="2" style="margin-top: 0px; margin-bottom: 0px; height: 55px;"></textarea>
           </div>
-          <button class="ui small black labeled submit icon button">
-            <i class="icon Medium comment alternate outline"></i> Submit comment
-          </button>
+          <button class="ui small black button">Submit comment</button>
         </form>
     </div>
     </div>
