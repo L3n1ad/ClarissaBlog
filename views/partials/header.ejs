@@ -38,7 +38,7 @@
          <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
            crossorigin=""></script>
-           <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+           <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
 
@@ -47,8 +47,8 @@
                 <a href="/" class="header item "><i class="barcode icon"></i>Blog Site</a>
                 <a href="/blogs" class="item">Home</a>
                 <% if(!currentUser){ %>
-                    <a href="/login" class="item right">Log in!</a>
-                    <a href="/register" class="item">Register!</a>
+                    <a href="/login" class="item right">Log in</a>
+                    <a href="/register" class="item">Register</a>
                 <% } else { %>
                   <% if(currentUser.isAdmin){ %>
                     <a href="/blogs/new" class="item">New Post</a>
