@@ -150,15 +150,21 @@ body {
   color: white;
   border-radius: 100px 50px;
   border-color: black;
-  border-color: #8e3d84;
+  border-color: rgba(153,153,153,1);
 }
 
 .ui.inverted.menu {
-    background: #8e3d84;
+    background: rgba(153,153,153,1);
+}
+
+.ui.inverted.menu .item, .ui.inverted.menu .item>a:not(.ui) {
+    background: 0 0;
+    color: black;
+    font-weight: 400;
 }
 
 .ui.animated.button {
-    background-color: #8e3d84;
+    background-color: rgba(153,153,153,1);
 }
 
 #profile-img {
