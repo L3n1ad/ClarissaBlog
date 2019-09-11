@@ -10,8 +10,17 @@
     color: black;
 }
 
+.ui.text.container.segment.blogPost {
+    background: rgb(153,153,153);
+}
+
+.blogPost p {
+  background: rgb(153,153,153)
+}
+
+
 #mapid {
-  max-width: 550px;
+  max-width: 300px;
   margin: auto;
    height: 500px;
    margin-top: 100px;
@@ -33,17 +42,21 @@ i.icon {
  #blogLogin {
      margin: 7rem auto;
      position: relative;
-     background-color: #8e3d84;
+     background-color: rgba(153,153,153,1);
      max-width: 200px;
-     border-radius: 15px 2px;
+     border-radius: 5px;
  }
+
+ .ui.menu:not(.vertical) .right.item, .ui.menu:not(.vertical) .right.menu {
+    padding: 0;
+}
 
 .login {
   margin: 7rem auto;
   position: relative;
-  background-color: #8e3d84;
+  background-color: rgba(153,153,153,1);
   max-width: 200px;
-  border-radius: 15px 2px;
+  border-radius: 5px;
 }
 
 .container.main {
@@ -146,11 +159,11 @@ body {
   position: relative;
   text-align: center;
   margin: 15%;
-  background: transparent;
+  background: rgba(153,153,153,0.5);
   color: white;
   border-radius: 100px 50px;
   border-color: black;
-  border-color: rgba(153,153,153,1);
+  border-color: rgba(153,153,153,0.5);
 }
 
 .ui.inverted.menu {
@@ -176,6 +189,16 @@ body {
 
 .authForm {
   z-index: 1;
+}
+
+hr.style14 {
+  margin-top: -10px;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
 }
 /*#newPost {*/
 /*    -webkit-appearance: none;*/
