@@ -1,32 +1,34 @@
 <%include ../partials/header%>
 
-<div class="ui main text rounded container">
-    <div class="ui huge header">RESTful Blog App</div>
-    <div class="ui top  attached segment">
-        <div class="ui divided items">
-            <% blogs.forEach(function(blog){ %>
-                <div class="item">
-                    <div class="image">
-                        <img src="<%= blog.blogImage1 %>" >
-                    </div>
-                    <div class="content">
-                         <a class="header" href="/blogs/<%= blog._id %>"><%=blog.title%></a>
-                         <div class="meta">
-                             <span><%= moment(blog.created).format("Do MMMM YYYY") %></span>
-                         </div>
-                         <div class="description">
-                             <p><%- blog.body.substring(0, 300) %>...</p>
-                         </div>
-                         <div class="extra">
-                             <a class="ui black button" href="/blogs/<%= blog._id %>">
-                                 Read More
-                             </a>
-                         </div>
-                    </div>
+
+      <% blogs.forEach(function(blog){ %>
+          <div class="ui main text container segment">
+            <div class="ui top  attached">
+                <div class="ui divided items">
+                  <div class="item">
+                      <div class="image">
+                          <img src="<%= blog.blogImage1 %>" >
+                      </div>
+                      <div class="content">
+                           <a class="header" href="/blogs/<%= blog._id %>"><%=blog.title%></a>
+                           <div class="meta">
+                               <span><%= moment(blog.created).format("Do MMMM YYYY") %></span>
+                           </div>
+                           <br>
+                           <hr class="style14">
+                           <div class="description">
+                               <p><%- blog.body.substring(0, 600) %>...</p>
+                           </div>
+                           <div class="extra">
+                               <a class="ui black button" href="/blogs/<%= blog._id %>">
+                                   Read More
+                               </a>
+                           </div>
+                      </div>
+                  </div>
                 </div>
-            <% }) %>
-        </div>
-    </div>
-</div>
+            </div>
+          </div>
+      <% }) %>
 
 <%include ../partials/footer%>
