@@ -22,7 +22,7 @@ router.get("/register", function (req, res){
 
 router.post("/register", function (req, res){
     var newUser = new User({username: req.body.username});
-    if(req.body.invitationCode === "ILoveFood" || req.body.invitationCode === "ClarissaBlog16" ){
+      if(req.body.invitationCode === "ILoveFood" || req.body.invitationCode === "ClarissaBlog16" ){
       if(req.body.invitationCode === "ClarissaBlog16"){
         newUser.isAdmin = true;
       }
