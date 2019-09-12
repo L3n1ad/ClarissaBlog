@@ -79,7 +79,7 @@ app.get("/", function(req, res){
 
 
 
-app.listen(process.env.PORT, process.env.ID, function (){
+app.listen(process.env.PORT, function (){
     console.log("BLOG server is running!");
 });
 // app.listen(3001, "localhost", function (){
