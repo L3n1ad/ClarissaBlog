@@ -29,7 +29,7 @@ var commentRoutes = require ("./routes/comments"),
 // APP CONFIG
 
 // mongoose.connect("mongodb://localhost:27017/ClarissaBlog", { useNewUrlParser: true });
-mongoose.connect("mongodb+srv://L3n1ad:" + process.env.MONGODB_PASSWORD + "@cluster0-9iei5.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://L3n1ad:" + process.env.MONGODBPASSWORD + "@cluster0-9iei5.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
