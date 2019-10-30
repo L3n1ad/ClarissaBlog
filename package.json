@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
-
   },
   "author": "L3n1ad",
   "license": "ISC",
@@ -23,6 +22,7 @@
     "mongodb": "^3.3.2",
     "mongoose": "^5.6.13",
     "multer": "^1.4.2",
+    "multer-gridfs-storage": "^3.3.0",
     "node-geocoder": "^3.23.0",
     "nodemon": "^1.19.2",
     "package.json": "^2.0.1",
