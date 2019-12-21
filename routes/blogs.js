@@ -8,7 +8,7 @@ var express       = require ("express"),
 // create multer(pic) upload
 
 // var storage = require('multer-gridfs-storage')({
-   // url: 'mongodb://localhost:27017/ClarissaBlog', 
+   // url: 'mongodb://localhost:27017/ClarissaBlog',
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
