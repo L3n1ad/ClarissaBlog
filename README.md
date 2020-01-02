@@ -4,81 +4,73 @@ This project is a simple blog app including admin and user authorisation, admin 
 
 ## Getting Started
 
+Instructions for API keys required for the app. It is important the use the following names for api keys because those names are used within the code to and .env recommended to secure api keys from public display
+
 API keys require to run the app:
 
-* It is important the use the following names for api keys because those names are used within the code to and .env recommended to secure api keys from public display
+* [MongoDB](https://cloud.mongodb.com/)it's required only for deployment not for localhost running - MONGODB_PASSWORD=apikeygoeshere
+* [Google Geocoder](https://console.cloud.google.com/) it's required to turn address from new blogs form to lang and long to be able display it on the map - GEOCODER_API_KEY=apikeygoeshere
+* [Leaflat map API](https://leafletjs.com/) it's required to display a map - LEAFLET_API_KEY=apikeygoeshere
 
-* [MongoDB]it's required only for deployment not for localhost running - MONGODB_PASSWORD=apikeygoeshere
-* [Google Geocoder] it's required to turn address from new blogs form to lang and long to be able display it on the map - GEOCODER_API_KEY=apikeygoeshere
-* [Leaflat map API] it's required to display a map - LEAFLET_API_KEY=apikeygoeshere
-* [Invitation code] for general users - INVITATION_CODE=apikeygoeshere
-* [Adming invitaion code] for users with admind permission - ADMIN_INVITATION_CODE=apikeygoeshere
+Set up environment variables for users invitation code it can be anything.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Naming needs to be used for those codes:
+
+* [Invitation code] for general users - INVITATION_CODE=codekeygoeshere
+* [Adming invitaion code] for users with admind permission - ADMIN_INVITATION_CODE=codekeygoeshere
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Things needs to be installed, follow official documentations:
 
-```
-Give examples
-```
+* MongoDB Compass
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+To install all npm run the following code on the top level:
 
 ```
-Give the example
+npm install
 ```
 
-And repeat
+Run mongoDB on your local machine run the following code in the terminal and leave it running:
 
 ```
-until finished
+mongod
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+To run the app run the following code on the top level:
+
+```
+node app.js
+```
+
+It's recommended to install [nodemon] for easier development in this case to run the app the code is the following(server don't need to be restarted manually after every changes):
+
+```
+nodemon app.js
+```
+
+
+Once everything is running the app will be accessible on localhost:3001.
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+The app can be easily deployment for free on heroku servers with GitHub in order to do the please follow the instructions on the following link (https://devcenter.heroku.com/articles/git)
 
 ## Built With
 
-* [Node.js](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [JavaScript](https://maven.apache.org/) - Dependency Management
-* [Express.js](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [MongoDB](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [Bootstrap](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [Multer](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [Body-parser](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [Google Geocoding API](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-* [Passport](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* [Node.js](https://nodejs.org/en/) - JavaScript runtime
+* [JavaScript](https://www.javascript.com/) - Main Language used
+* [Express.js](https://expressjs.com/) - Node.js web application framework
+* [MongoDB](https://www.mongodb.com/) - Databe used for the project
+* [Bootstrap](https://getbootstrap.com/) - Front-end component library used for styling the app
+* [Body-parser](https://www.npmjs.com/package/body-parser) - NPM to be able handle data input coming from the new blog post
+* [Google Geocoding API](https://console.cloud.google.com/) - Used to turn address to lang and long
+* [Passport](https://www.npmjs.com/package/passport) - Used for authentication.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
