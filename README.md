@@ -1,8 +1,18 @@
 # Project Title
 
-One Paragraph of project description goes here
+This project is a simple blog app including admin and user authorisation, admin authorisation includes full control over comments and blog posts, geocoding to display locations on a map, a comment section and future plans to include rating system for posts and options to share posts easly on social media.
 
 ## Getting Started
+
+API keys require to run the app:
+
+* It is important the use the following names for api keys because those names are used within the code to and .env recommended to secure api keys from public display
+
+* [MongoDB]it's required only for deployment not for localhost running - MONGODB_PASSWORD=apikeygoeshere
+* [Google Geocoder] it's required to turn address from new blogs form to lang and long to be able display it on the map - GEOCODER_API_KEY=apikeygoeshere
+* [Leaflat map API] it's required to display a map - LEAFLET_API_KEY=apikeygoeshere
+* [Invitation code] for general users - INVITATION_CODE=apikeygoeshere
+* [Adming invitaion code] for users with admind permission - ADMIN_INVITATION_CODE=apikeygoeshere
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
@@ -32,35 +42,22 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Node.js](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [JavaScript](https://maven.apache.org/) - Dependency Management
+* [Express.js](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [MongoDB](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Bootstrap](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Multer](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Body-parser](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Google Geocoding API](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Passport](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
 
 ## Contributing
 
