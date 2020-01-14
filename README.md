@@ -1,6 +1,6 @@
-# Project Title
+# Clarissa Blog App
 
-This project is a simple blog app including admin and user authorisation, admin authorisation includes full control over comments and blog posts, geocoding to display locations on a map, a comment section and future plans to include rating system for posts and options to share posts easly on social media.
+This project is a simple blog app including admin and user authorisation, admin authorisation includes full control over comments and blog posts, geocoding to display locations on a map, a comment section and future plans to include rating system for posts and options to share posts easly on social media. A deployed version of the blog can be found on the following link: https://clarissa-blog.herokuapp.com/
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ Naming needs to be used for those codes:
 
 ### Prerequisites
 
-Things needs to be installed, follow official documentations:
+Things needs to be installed for development, follow official documentations:
 
 * MongoDB Compass
 
